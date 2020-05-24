@@ -1,27 +1,69 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# powerplant-coding-challenge Submission
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+## Source
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+<https://github.com/gem-spaas/powerplant-coding-challenge>
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+## Getting started
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+### Visual studio
 
+Requirements:
 
+- Visual studio 2019 v16.4+
+
+Open **powerplant-coding-challenge.sln** and run debugger.
+
+### Docker
+
+Requirements:
+
+- Docker desktop
+
+Navigate to source directory (source dir includes .slm, Dockerfile, ...)
+
+Build image
 
 ```cmd
-docker build -t applicationapi .
-docker run -p 8888:80 -d --name productionplanapi applicationapi
+docker build -t production-plan-api .
+```
+
+Run container
+
+```cmd
+docker run -p 8888:80 -d --name production-plan-api application-api
+```
+
+Navigate to <http://localhost:8888>
+
+CleanUp
+
+Stop **production-plan-api** container
+
+```cmd
+docker container stop production-plan-api
+```
+
+Remove **production-plan-api** container
+
+```cmd
+docker container rm production-plan-api
+```
+
+Remove **application-api** image
+
+```cmd
+docker image rm application-api
+```
+
+Check image list
+
+```cmd
+docker image ls
+```
+
+Remove other recently added images during build
+
+```cmd
+docker image rm <image to be removed>
 ```

@@ -11,9 +11,9 @@ namespace Application.API.Extensions
             {
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "PowerPlant Coding Challenge",
+                    Title = "PowerPlant Coding Challenge Submission",
                     Version = "v1",
-                    Description = "Challenge submission",
+                    Description = "Submission for: <a href=\"https://github.com/gem-spaas/powerplant-coding-challenge \" target=\"_blank\">powerplant-coding-challenge</a>",
                 });
             });
 

@@ -27,7 +27,7 @@ namespace Application.API.Controllers
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(UnitCommitmentResponse[]), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public IActionResult Post([FromBody]ProductionPlanRequest body)
+        public IActionResult Post([FromBody] ProductionPlanRequest body)
         {
             var load = body.Load;
             var powerPlants = _mapper.Map<ICollection<PowerPlant>>(body);

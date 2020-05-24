@@ -1,7 +1,7 @@
-using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using System;
 
 namespace Application.API
 {
@@ -13,7 +13,7 @@ namespace Application.API
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
                 .CreateLogger();
-        
+
             try
             {
                 Log.Information("Starting up");

@@ -37,7 +37,7 @@ namespace Domain.ProductionPlanning.Tests
             => new Fuels { GasPrice = fuels.Gas, KerosinePrice = fuels.Kerosine, C02EmissionConst = fuels.Co2, PercentageOfWind = fuels.Wind };
 
         private static ICollection<PowerPlant> CreatePowerPlants(IEnumerable<PowerPlantModel> powerPlants, Fuels fuels)
-            => powerPlants.Select(p => new PowerPlant(p.Name, CreatePowerPlantType(p.Type), fuels, p.Efficiency, p.PMin, p.PMax))
+            => powerPlants.Select(p => new PowerPlant(p.Name, p.Type, fuels, p.Efficiency, p.PMin, p.PMax))
                 .ToList();
 
         private static PowerPlantType CreatePowerPlantType(string type)

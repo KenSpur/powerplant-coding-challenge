@@ -1,4 +1,5 @@
-﻿using Domain.ProductionPlanning.Models.Enums;
+﻿using Domain.ProductionPlanning.Defaults;
+using Domain.ProductionPlanning.Models.Enums;
 using System;
 
 namespace Domain.ProductionPlanning.Models
@@ -7,12 +8,19 @@ namespace Domain.ProductionPlanning.Models
     {
         private readonly decimal _pmax;
 
-        public PowerPlant(string name, PowerPlantType type, Fuels fuels, decimal efficiency, decimal pmin, decimal pmax)
+        public PowerPlant(string name, string type, Fuels fuels, decimal efficiency, decimal pmin, decimal pmax)
         {
             Id = Guid.NewGuid();
             _pmax = pmax;
-            Name = name;
-            Type = type;
+
+            Type = Enum.TryParse<PowerPlantType>(type, true, out var typeEnum)
+                ? typeEnum
+                : PowerPlantType.InValid;
+
+            Name = Type == PowerPlantType.InValid
+                ? $"{name} {InternalProductionPlanningDefaults.InvalidType}"
+                : name;
+
             Fuels = fuels;
             Efficiency = efficiency;
             PMin = pmin;
@@ -29,7 +37,8 @@ namespace Domain.ProductionPlanning.Models
             {
                 PowerPlantType.GasFired => _pmax,
                 PowerPlantType.TurboJet => _pmax,
-                PowerPlantType.WindTurbine => _pmax * ((decimal)Fuels.PercentageOfWind / 100),
+                PowerPlantType.WindTurbine => _pmax * (Fuels.PercentageOfWind / 100),
+                PowerPlantType.InValid => 0,
                 _ => throw new ArgumentOutOfRangeException()
             };
         public decimal MwhPrice
@@ -38,6 +47,7 @@ namespace Domain.ProductionPlanning.Models
                 PowerPlantType.GasFired => Fuels.GasPrice / Efficiency + Fuels.C02EmissionConst * (decimal)0.3,
                 PowerPlantType.TurboJet => Fuels.KerosinePrice / Efficiency,
                 PowerPlantType.WindTurbine => 0,
+                PowerPlantType.InValid => 0,
                 _ => throw new ArgumentOutOfRangeException()
             };
         public decimal EstimatedPower { get; private set; }

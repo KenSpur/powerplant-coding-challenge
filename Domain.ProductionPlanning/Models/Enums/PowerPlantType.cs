@@ -4,6 +4,7 @@
     {
         GasFired,
         TurboJet,
-        WindTurbine
+        WindTurbine,
+        InValid
     }
 }

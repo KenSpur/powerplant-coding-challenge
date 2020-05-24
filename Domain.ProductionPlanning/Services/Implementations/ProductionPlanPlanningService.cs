@@ -11,13 +11,15 @@ namespace Domain.ProductionPlanning.Services.Implementations
         public ProductionPlan CalculateUnitCommitment(decimal requiredLoad, ICollection<PowerPlant> powerPlants)
         {
             if (!powerPlants.Any(p => p.PMin < requiredLoad))
-                return new ProductionPlan(requiredLoad, powerPlants, InternalProductionPlanningDefaults.CantMeetLoadMessage);
+                return new ProductionPlan(requiredLoad, powerPlants, InternalProductionPlanningDefaults
+                    .CantMeetLoadMessage(powerPlants.EstimatedPower() - requiredLoad));
 
             if (TrySetCheapestPowerSourcesToMaxUntilLoadMet(requiredLoad, powerPlants))
                 return new ProductionPlan(requiredLoad, powerPlants);
 
             if (powerPlants.EstimatedPower() < requiredLoad)
-                return new ProductionPlan(requiredLoad, powerPlants, InternalProductionPlanningDefaults.CantMeetLoadMessage);
+                return new ProductionPlan(requiredLoad, powerPlants, InternalProductionPlanningDefaults
+                    .CantMeetLoadMessage(powerPlants.EstimatedPower() - requiredLoad));
 
             if (TryDecreaseMostCostlyOverShotPower(requiredLoad, powerPlants))
                 return new ProductionPlan(requiredLoad, powerPlants);

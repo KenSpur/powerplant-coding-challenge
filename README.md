@@ -25,7 +25,7 @@ Navigate to source directory (source dir includes .slm, Dockerfile, ...)
 Build image
 
 ```cmd
-docker build -t production-plan-api .
+docker build -t application-api .
 ```
 
 Run container

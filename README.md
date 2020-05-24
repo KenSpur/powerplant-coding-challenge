@@ -22,13 +22,13 @@ Requirements:
 
 Navigate to source directory (source dir includes .slm, Dockerfile, ...)
 
-Build image
+Build image **application-api**
 
 ```cmd
 docker build -t application-api .
 ```
 
-Run container
+Run container **production-plan-api** from image **application-api** on port 8888
 
 ```cmd
 docker run -p 8888:80 -d --name production-plan-api application-api

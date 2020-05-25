@@ -1,11 +1,9 @@
 using Application.ProductionPlan.Shared;
 using Domain.ProductionPlanning.Models;
-using Domain.ProductionPlanning.Models.Enums;
 using Domain.ProductionPlanning.Services;
 using Domain.ProductionPlanning.Services.Implementations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -39,9 +37,6 @@ namespace Domain.ProductionPlanning.Tests
         private static ICollection<PowerPlant> CreatePowerPlants(IEnumerable<PowerPlantModel> powerPlants, Fuels fuels)
             => powerPlants.Select(p => new PowerPlant(p.Name, p.Type, fuels, p.Efficiency, p.PMin, p.PMax))
                 .ToList();
-
-        private static PowerPlantType CreatePowerPlantType(string type)
-            => (PowerPlantType)Enum.Parse(typeof(PowerPlantType), type, true);
 
         private static IEnumerable<object[]> Payloads()
         {

@@ -44,7 +44,7 @@ namespace Domain.ProductionPlanning.Models
         public decimal MwhPrice
             => Type switch
             {
-                PowerPlantType.GasFired => Fuels.GasPrice / Efficiency + Fuels.C02EmissionConst * (decimal)0.3,
+                PowerPlantType.GasFired => Fuels.GasPrice / Efficiency + Fuels.C02EmissionConst * 0.3m,
                 PowerPlantType.TurboJet => Fuels.KerosinePrice / Efficiency,
                 PowerPlantType.WindTurbine => 0,
                 PowerPlantType.InValid => 0,
